@@ -3,19 +3,27 @@ package com.shinelon.rxjavalearn;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.shinelon.rxjavalearn.manyrx.RxJava_1;
+import com.shinelon.rxjavalearn.manyrx.RxJava01;
+import com.shinelon.rxjavalearn.manyrx.RxJavaMapType;
+import com.shinelon.rxjavalearn.manyrx.RxJavaThreadControl;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private RxJava_1 rxJava_1;
+    private RxJava01 rxJava01;
+    private RxJavaThreadControl rxJavaThreadControl;
+    private RxJavaMapType rxJavaMapType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //LogUtils.d(TAG,"nihao");
-        rxJava_1 = new RxJava_1();
-        rxJava_1.testInteger();
+        rxJava01 = new RxJava01();
+        rxJavaThreadControl = new RxJavaThreadControl();
+        rxJavaMapType = new RxJavaMapType();
+        rxJavaMapType.symbolConcatMap();
+
+
     }
 }
