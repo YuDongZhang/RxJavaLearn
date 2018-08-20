@@ -4,8 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.shinelon.rxjavalearn.manyrx.RxJava01;
+import com.shinelon.rxjavalearn.manyrx.RxJavaFlowable;
 import com.shinelon.rxjavalearn.manyrx.RxJavaMapType;
 import com.shinelon.rxjavalearn.manyrx.RxJavaThreadControl;
+import com.shinelon.rxjavalearn.manyrx.RxjavaZip;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private RxJava01 rxJava01;
     private RxJavaThreadControl rxJavaThreadControl;
     private RxJavaMapType rxJavaMapType;
+    private RxjavaZip rxjavaZip;
+    private RxJavaFlowable rxJavaFlowable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
         rxJava01 = new RxJava01();
         rxJavaThreadControl = new RxJavaThreadControl();
         rxJavaMapType = new RxJavaMapType();
-        rxJavaMapType.symbolConcatMap();
-
+        rxjavaZip = new RxjavaZip();
+        rxJavaFlowable = new RxJavaFlowable();
+        rxJavaFlowable.testFlowable();
 
     }
 }

@@ -97,6 +97,7 @@ public class RxJavaMapType {
                 for (int i=0;i<3;i++){
                     list.add("I am value " + integer);
                 }
+                list.add("--------------");
                 return Observable.fromIterable(list).delay(10, TimeUnit.MILLISECONDS);
             }
         }).subscribe(new Consumer<String>() {
