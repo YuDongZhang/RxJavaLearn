@@ -1,0 +1,263 @@
+连接命令：
+sudo su
+minicom
+otg_control 1  
+
+切换用户：
+获取用户列表: adb shell pm list users
+创建用户guest ： adb shell pm create-user guest                  
+删除某一个用户: adb shell pm remove-user <User_ID>
+切换到用户10：  adb shell am switch-user 10     
+
+装app：
+./gradlew assemble
+
+清除data： rm -r /data/* 
+
+重启 ： reboot
+
+查看系统应用： cd system/priv-app/  
+
+模拟点击： input tap 800 360
+模拟返回： input keyevent BACK
+
+在重新装载x37之后需要移除系统的 rm -r Video-release/ 这个文件
+
+刷机步骤：
+清data：rm -rf data/*
+reboot 后马上 按住shift和大于号，进入fastboot，输入fastboot，显示设备
+在另外一个端口： sudo fastboot flash boot '/home/pateo/dailybuild/20180402/boot-imx6qp_adb.img'
+在另外一个端口： sudo fastboot flash recovery '/home/pateo/dailybuild/20180402/recovery-imx6qp.img'
+在另外一个端口： sudo fastboot flash bootloader_nor  '/home/pateo/dailybuild/20180402/u-boot-imx6qp.imx'
+在另外一个端口： sudo fastboot flash system /home/pateo/dailybuild/20180202/system.img
+在另外一个端口： sudo fastboot flash resc /home/pateo/dailybuild/20180202/resource.img
+重启： sudo fastboot reboot
+触屏控制：
+pateo@pateo-OptiPlex-3046:~$ adb push  '/home/pateo/dailybuild/eGTouchA.ini' /system/etc/
+pateo@pateo-OptiPlex-3046:~$ adb push  '/home/pateo/dailybuild/eGTouchA.ini' /data/
+
+快速：
+sudo fastboot flash system /home/pateo/下载/system.img
+sudo fastboot flash resc /home/pateo/下载/resource.img
+
+
+安装APP：  ^Cpateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/BjevVideo$ ./build.sh
+启动一个activity ： am start com.pateo.bjev.video/.activity.MainActivity 
+
+启动settings： adb shell am start com.android.settings    
+下次重启之后，只要执行后两个命令就可以启动settings了，因为系统已经保存了guest 用户
+
+向机器push 文件：
+pateo@pateo-OptiPlex-3046:~$ adb remount
+pateo@pateo-OptiPlex-3046:~$ adb push /home/pateo/视频/video20  /inand/
+
+push文件： pateo@pateo-OptiPlex-3046:~$ adb push '/home/pateo/视频/video20/BANG BANG BANG BigBang.mp4' storage
+
+查看存储 ： df 
+删除文件 ：rm -rf 目录名字  
+
+看打印的日志：
+root@f0307h:/private # logcat -v time -s video
+
+
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/workspace/projects/HQ/HQVideo$ git diff
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/workspace/projects/HQ/HQVideo$ git status
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/workspace/projects/HQ/HQVideo$ git push origin HEAD:refs/for/master
+
+查看log文件
+2|root@f0307h:/private # cd log/                                                
+root@f0307h:/private/log # ls  
+
+删除以前的
+1|root@f0307h:/private/log # rm -rf *                                           
+root@f0307h:/private/log # ls   
+
+
+查看软件是否存在：
+root@f0307h:/data/app # ls
+删除软件：
+pateo@pateo-OptiPlex-3046:~$ adb remount
+remount succeeded
+pateo@pateo-OptiPlex-3046:~$ adb uninstall com.pateo.faw.video
+
+Success
+
+root@f0307h:/data/data/com.pateo.faw.video # ls
+
+打开设置am start com.android.settings   
+
+查看ip： root@f0307h:/ # ifconfig   
+
+
+打印日志： logcat -v time -s video       
+
+根据log来打印的： logcat -v time -s BjevVideo&  
+
+
+运行时异常： logcat -v time -s AndroidRuntime    logcat | grep -E "video|AndroidRuntime"  
+
+
+提交代码： git push origin HEAD:refs/for/master	
+
+
+复制log日志到u盘：   logcat -v time -s AndroidRuntime > /mnt/media_rw/7773-5ADC/temp.log  
+
+保存修改  git stash save
+恢复修改 git stash pop
+
+导出log   adb logcat -v time > log.txt
+
+安装app  adb install -r 路径
+
+启动机器人语音   adb shell am startservice com.pateo.faw.hqivoka/.service.WindowService
+
+查看uicontrol 日志 logcat |grep -i "UIControl"  
+
+更新jar包命令pateo@pateo-OptiPlex-3046:~/libs_release$ git pull
+
+查看系统 ：root@f0307h:/ # getprop
+
+
+adb shell am start com.pateo.faw.video/com.pateo.faw.video.activity.VideoHome
+
+过滤所有文件的日志：
+pateo@pateo-OptiPlex-3046:~/下载/log$ grep -nr "AndroidRuntime" *
+
+查看机器版本号： getprop
+
+启动小琪：am startservice com.pateo.faw.hqivoka/.service.VoiceService
+
+
+出现升级模式：
+
+reboot bootloader
+	bparam clear
+	reset
+
+语音过滤： logcat -s SttService
+
+过滤音频策略：adb logcat -v time |grep -i requestaudio
+
+登录广播： 
+	am broadcast -a com.pateo.faw.login.newUserComing --es faceid "301607" --es colorId "301607"
+	am broadcast -a com.pateo.faw.login.enterKanzi --es faceid "11" --es colorId "11"
+
+build.sh 权限不够解决   ll -l  看文件中那些是不可写的  chmod +r 文件名字  chmod +x 文件名字  修改权限
+
+安装弹窗的服务的：
+adb push /media/pateo/FLASHDEVICE/BjevDialog-release-signed.apk /system/app/
+
+刷机云度新版本： reboot recovery
+
+
+git提交：:~/AndroidStudioProjects/YD/packages/apps/YundoVideo$ git status  看状态
+
+46:~/AndroidStudioProjects/YD/packages/apps/YundoVideo$ git add app/  添加目下要提交的文件
+
+3046:~/AndroidStudioProjects/YD/packages/apps/YundoVideo$ git commit 
+
+
+yundo 将系统的video删除掉 在进行覆盖安装  就可以每次都重新覆盖安装  1.adb remount  2.rm - rf xxxxxx 后面不要斜杠 3.查看是否已经删除掉
+
+YundoVideo$ vim .git/config  更改git 配置
+
+测试是否编过: /AndroidStudioProjects/YD/scripts$ ./build_app.sh -r YudoVideo/app
+
+             YudoCard$ cat .git/hooks/
+
+minicom lock时候配置  :  ctrl a 进入 配置模式
+
+查看依赖冲突的时候: gradlew -q app:dependencies
+
+
+git查看  cat .git/config 
+git编辑  vi .git/config 
+
+git提交后 没有合并 然后再提交的一个 合到未提交中去  
+/YudoPhoto$ git status
+YudoPhoto$ git add ./app/ build.gradle local.properties 
+/YudoPhoto$ git rm local.properties 
+/YudoPhoto$ git rm local.properties --cached
+apps/YudoPhoto$ git commit --amend 
+
+
+
+
+YudoPhoto$ scp -p -P 29418 zhangyudong@10.10.96.213:hooks/commit-msg .git/hooks/
+s/YudoPhoto$ git commit --amend 
+
+
+apps/YudoLauncher$ git status
+apps/YudoLauncher$ git stash save
+apps/YudoLauncher$ git pull origin master 
+突（内容）：合并冲突于 app/build.gradle
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoLauncher$ git checkout app/src/*
+error: 路径 'app/src/main/java/com/pateo/yudo/launcher/Launcher.java' 未合并
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoLauncher$ git checkout app/src/main/
+AndroidManifest.xml  java/                res/                 
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoLauncher$ git checkout app/src/main/
+AndroidManifest.xml  java/                res/                 
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoLauncher$ git checkout app/src/main/java/com/pateo/yudo/launcher/
+Launcher.java                NegativeItemDecoration.java  
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoLauncher$ git checkout app/src/main/java/com/pateo/yudo/launcher/Launcher.java
+
+/apps/YudoCard$ git stash pop  重新拉出来放到代码重新合并
+
+
+追加:
+git comint-- amend  
+crtl o
+crtl x
+在git head 方式提交
+
+git 配置 
+git init
+git remote add master https://github.com/YuDongZhang/MvpLearn.git
+git status
+git add app/ build.gradle gradle.properties gradlew gradlew.bat settings.gradle gradle/
+ git push master master 
+
+git stash sasve
+git pull master master
+
+//第一次的操作  由于还是和项目有点冲突
+git init
+git remote add master https://github.com/YuDongZhang/RxFluxDemo.git //master 定本地名字
+git status
+git add app/ build.gradle gradle.properties  gradle/ gradlew settings.gradle 
+git status
+git commit -m "第一次提交"
+git stash save 
+git pull https://github.com/YuDongZhang/RxFluxDemo.git
+有个操作 ctrl o 回车 ctrl x  
+git stash pop 
+git push master master 
+
+
+内部图片的数据库的路径:/private/database/com.qinggan.providers.media 
+
+提交代码钩子出现错误的:
+To ssh://zhangyudong@10.10.96.213:29418/projects/QingGan_B101_APP/packages/apps/YudoCard
+ ! [remote rejected] HEAD -> refs/for/master (missing Change-Id in commit message footer)
+error: 无法推送一些引用到 'ssh://zhangyudong@10.10.96.213:29418/projects/QingGan_B101_APP/packages/apps/YudoCard'
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoCard$ cat .git/
+branches/       config          FETCH_HEAD      hooks/          info/           objects/        packed-refs     
+COMMIT_EDITMSG  description     HEAD            index           logs/           ORIG_HEAD       refs/           
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoCard$ cat .git/hooks/
+applypatch-msg.sample      post-update.sample         pre-commit.sample          pre-push.sample            update.sample
+commit-msg.sample          pre-applypatch.sample      prepare-commit-msg.sample  pre-rebase.sample          
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoCard$ cd ..
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps$ scp -p -P 29418 zhangyudong@10.10.96.213:hooks/commit-msg YudoCard/.git/hooks/
+commit-msg                                                                                                       100% 4662     4.6KB/s   00:00    
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps$ cd YudoCard/
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoCard$ cat .git/hooks/
+applypatch-msg.sample      commit-msg.sample          pre-applypatch.sample      prepare-commit-msg.sample  pre-rebase.sample
+commit-msg                 post-update.sample         pre-commit.sample          pre-push.sample            update.sample
+pateo@pateo-OptiPlex-3046:~/AndroidStudioProjects/YD/packages/apps/YudoCard$ cat .git/hooks/
+
+
+
+输入法:第一画不出来
+
+ cat .git/config 查看仓库名字
+

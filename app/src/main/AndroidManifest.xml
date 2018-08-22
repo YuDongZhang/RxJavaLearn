@@ -17,6 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".javademo.LoginActivity"/>
+
+        <activity android:name=".javademo.Main2Activity"/>
+
     </application>
 
 </manifest>
