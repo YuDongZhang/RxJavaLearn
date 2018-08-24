@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.shinelon.rxjavalearn.TwoRx.RxSymbol;
 import com.shinelon.rxjavalearn.manyrx.RxJava01;
 import com.shinelon.rxjavalearn.manyrx.RxJavaFlowable;
 import com.shinelon.rxjavalearn.manyrx.RxJavaFlowableTwo;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private RxJavaFlowableTwo rxJavaFlowableTwo;
     private RxJavaPluginUnit rxJavaPluginUnit;
 
+    private RxSymbol rxSymbol;
     private Button button1,button2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
         rxJavaPluginUnit = new RxJavaPluginUnit();
         /*rxJavaPluginUnit.testSetOnMaybeSubscribe();  //这个方法进行重新的修改 插入方法
         rxJavaPluginUnit.testPlugin();*/  //这两个要放到一起来测试
-        rxJavaPluginUnit.testSetOnMaybeSubscribe();
-        rxJavaPluginUnit.testMaybe();
+        rxSymbol = new RxSymbol();
+        rxSymbol.testBuffer();
+
+
 
         testFlowableDorp();
     }
