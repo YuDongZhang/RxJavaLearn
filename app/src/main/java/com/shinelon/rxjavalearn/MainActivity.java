@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         /*rxJavaPluginUnit.testSetOnMaybeSubscribe();  //这个方法进行重新的修改 插入方法
         rxJavaPluginUnit.testPlugin();*/  //这两个要放到一起来测试
         rxSymbol = new RxSymbol();
-        rxSymbol.testBuffer();
+        rxSymbol.testWindown();
 
 
 
@@ -85,4 +85,8 @@ public class MainActivity extends AppCompatActivity {
             }                                //每次请求多少事件,testBackPressLatest 请求128个事件
         });
     }
+
+    /**
+     * 修改测试
+     */
 }
