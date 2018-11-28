@@ -15,6 +15,9 @@ import com.shinelon.rxjavalearn.manyrx.RxJavaThreadControl;
 import com.shinelon.rxjavalearn.manyrx.RxjavaZip;
 
 public class MainActivity extends AppCompatActivity {
+    /**
+     * https://www.jianshu.com/p/e9c79eacc8e3
+     */
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
